@@ -23,10 +23,10 @@ func (*server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
 		}
 
 		firstName := req.GetFirstName()
-		result := "Hello " + firstName + "!"
+		res := "Hello " + firstName + "!"
 
 		sendErr := stream.Send(&pb.GreetResponse{
-			Result: result,
+			Result: res,
 		})
 
 		if sendErr != nil {
