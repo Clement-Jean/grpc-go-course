@@ -9,11 +9,8 @@ on:
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        os: [windows-2022, ubuntu-20.04, macos-11]
     steps:
       - uses: actions/checkout@v2
 
@@ -47,7 +44,6 @@ jobs:
           cd greet && protoc proto/*.proto --go-grpc_out=. --go_out=.
           cd calculator && protoc proto/*.proto --go-grpc_out=. --go_out=.
           cd blog && protoc proto/*.proto --go-grpc_out=. --go_out=.
-          
 
       - name: Build
         run: go build -v ./...
