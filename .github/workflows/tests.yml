@@ -17,10 +17,37 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache protobuf library
+        id: cache-protobuf
+        uses: actions/cache@v1
+        with:
+          path: protobuf
+          key: ${{ runner.os }}-protobuf
+
+      - name: Build protobuf library
+        run: |
+          git clone https://github.com/protocolbuffers/protobuf.git
+          cd protobuf
+          git submodule update --init --recursive
+          ./autogen.sh
+          ./autogen.sh
+          ./configure
+          make
+          make check
+          sudo make install
+          sudo ldconfig
+
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
+
+      - name: Generate pb.go
+        run: |
+          cd greet && protoc proto/*.proto --go-grpc_out=. --go_out=.
+          cd calculator && protoc proto/*.proto --go-grpc_out=. --go_out=.
+          cd blog && protoc proto/*.proto --go-grpc_out=. --go_out=.
+          
 
       - name: Build
         run: go build -v ./...
