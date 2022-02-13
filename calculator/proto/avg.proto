@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "./proto";
+
+message AvgRequest {
+    int32 number = 1;
+}
+
+message AvgResponse {
+    double result = 1;
+}

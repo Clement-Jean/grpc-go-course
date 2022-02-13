@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "./proto";
+
+message MaxRequest {
+    int32 number = 1;
+}
+
+message MaxResponse {
+    int32 result = 1;
+}

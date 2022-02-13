@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package calculator;
+option go_package = "./proto";
+
+message SqrtRequest {
+    int32 number = 1; // could be uint32 number = 1;
+}
+
+message SqrtResponse {
+    double result = 1;
+}
