@@ -22,6 +22,7 @@ jobs:
           key: ${{ runner.os }}-protobuf
 
       - name: Build protobuf library
+        if: steps.cache-protobuf.outputs.cache-hit != 'true'
         run: |
           git clone https://github.com/protocolbuffers/protobuf.git
           cd protobuf
@@ -31,8 +32,12 @@ jobs:
           ./configure
           make
           make check
+          
+      - name: Install protobuf library
+        run: |
+          cd protobuf
           sudo make install
-          sudo ldconfig
+          sudo ldconfig 
 
       - name: Set up Go
         uses: actions/setup-go@v2
