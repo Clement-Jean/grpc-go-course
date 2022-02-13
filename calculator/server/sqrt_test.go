@@ -45,19 +45,19 @@ func TestSqrtError(t *testing.T) {
 		t.Error("Expected error, got nil")
 	}
 
-	respErr, ok := status.FromError(err)
+	e, ok := status.FromError(err)
 
 	if !ok {
 		t.Error("Expected error")
 	}
 
-	if respErr.Code() != codes.InvalidArgument {
-		t.Errorf("Expected InvalidArgument, got %v", respErr.Code().String())
+	if e.Code() != codes.InvalidArgument {
+		t.Errorf("Expected InvalidArgument, got %v", e.Code().String())
 	}
 
 	expected := "Received a negative number: -1"
 
-	if respErr.Message() != expected {
-		t.Errorf("Expected \"%s\", got %s", expected, respErr.Message())
+	if e.Message() != expected {
+		t.Errorf("Expected \"%s\", got %s", expected, e.Message())
 	}
 }

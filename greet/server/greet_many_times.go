@@ -13,10 +13,10 @@ func (s *server) GreetManyTimes(in *pb.GreetRequest, stream pb.GreetService_Gree
 	firstName := in.GetFirstName()
 
 	for i := 0; i < 10; i++ {
-		result := "Hello " + firstName + " number " + strconv.Itoa(i)
+		res := "Hello " + firstName + " number " + strconv.Itoa(i)
 
 		stream.Send(&pb.GreetResponse{
-			Result: result,
+			Result: res,
 		})
 	}
 

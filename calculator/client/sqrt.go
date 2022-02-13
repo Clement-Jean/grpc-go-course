@@ -13,13 +13,13 @@ func doSqrt(c pb.CalculatorServiceClient, n int32) {
 	res, err := c.Sqrt(context.Background(), &pb.SqrtRequest{Number: n})
 
 	if err != nil {
-		respErr, ok := status.FromError(err)
+		e, ok := status.FromError(err)
 
 		if ok {
-			log.Printf("Error message from server: %v\n", respErr.Message())
-			log.Println(respErr.Code())
+			log.Printf("Error message from server: %v\n", e.Message())
+			log.Println(e.Code())
 
-			if respErr.Code() == codes.InvalidArgument {
+			if e.Code() == codes.InvalidArgument {
 				log.Println("We probably sent a negative number!")
 				return
 			}

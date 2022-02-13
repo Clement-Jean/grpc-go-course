@@ -52,7 +52,7 @@ func TestGreetEveryone(t *testing.T) {
 		idx := 0
 
 		for {
-			resp, err := stream.Recv()
+			res, err := stream.Recv()
 
 			if err == io.EOF {
 				break
@@ -64,8 +64,8 @@ func TestGreetEveryone(t *testing.T) {
 			}
 
 			expected := "Hello " + requests[idx].FirstName + "!"
-			if resp.Result != expected {
-				t.Errorf("Expected \"%s\", got: \"%s\"", expected, resp.Result)
+			if res.Result != expected {
+				t.Errorf("Expected \"%s\", got: \"%s\"", expected, res.Result)
 			}
 
 			idx++

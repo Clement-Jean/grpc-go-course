@@ -39,14 +39,14 @@ func TestGreet(t *testing.T) {
 
 	for _, tt := range tests {
 		req := &pb.GreetRequest{FirstName: tt.name}
-		resp, err := c.Greet(context.Background(), req)
+		res, err := c.Greet(context.Background(), req)
 
 		if err != nil {
 			t.Errorf("Greet(%v) got unexpected error", tt)
 		}
 
-		if resp.Result != tt.expected {
-			t.Errorf("GreetResponse(%v) = %v, expected %v", tt.name, resp.Result, tt.expected)
+		if res.Result != tt.expected {
+			t.Errorf("GreetResponse(%v) = %v, expected %v", tt.name, res.Result, tt.expected)
 		}
 	}
 }

@@ -43,14 +43,14 @@ func TestSum(t *testing.T) {
 
 	for _, tt := range tests {
 		req := &pb.SumRequest{FirstNumber: tt.first_number, SecondNumber: tt.second_number}
-		resp, err := c.Sum(context.Background(), req)
+		res, err := c.Sum(context.Background(), req)
 
 		if err != nil {
 			t.Errorf("Sum(%v) got unexpected error", tt)
 		}
 
-		if resp.Result != tt.expected {
-			t.Errorf("SumResponse(%v, %v) = %v, expected %v", tt.first_number, tt.second_number, resp.Result, tt.expected)
+		if res.Result != tt.expected {
+			t.Errorf("SumResponse(%v, %v) = %v, expected %v", tt.first_number, tt.second_number, res.Result, tt.expected)
 		}
 	}
 }

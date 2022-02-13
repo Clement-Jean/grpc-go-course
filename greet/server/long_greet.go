@@ -10,13 +10,13 @@ import (
 func (*server) LongGreet(stream pb.GreetService_LongGreetServer) error {
 	log.Println("LongGreet function was invoked")
 
-	result := ""
+	res := ""
 
 	for {
 		req, err := stream.Recv()
 		if err == io.EOF {
 			return stream.SendAndClose(&pb.GreetResponse{
-				Result: result,
+				Result: res,
 			})
 		}
 
@@ -25,6 +25,6 @@ func (*server) LongGreet(stream pb.GreetService_LongGreetServer) error {
 		}
 
 		firstName := req.GetFirstName()
-		result += "Hello " + firstName + "!\n"
+		res += "Hello " + firstName + "!\n"
 	}
 }

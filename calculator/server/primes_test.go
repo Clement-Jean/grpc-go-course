@@ -25,7 +25,7 @@ func TestPrimes(t *testing.T) {
 		Number: 567890,
 	}
 
-	resp, err := c.Primes(context.Background(), req)
+	res, err := c.Primes(context.Background(), req)
 
 	if err != nil {
 		t.Errorf("Primes(%v) got unexpected error", err)
@@ -35,7 +35,7 @@ func TestPrimes(t *testing.T) {
 	primes := []int64{}
 
 	for {
-		prime, err := resp.Recv()
+		prime, err := res.Recv()
 
 		if err == io.EOF {
 			break

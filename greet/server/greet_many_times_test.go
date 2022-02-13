@@ -25,7 +25,7 @@ func TestGreetManyTimes(t *testing.T) {
 		LastName:  "Jean",
 	}
 
-	resp, err := c.GreetManyTimes(context.Background(), req)
+	res, err := c.GreetManyTimes(context.Background(), req)
 
 	if err != nil {
 		t.Errorf("GreetManyTimes(%v) got unexpected error", err)
@@ -34,7 +34,7 @@ func TestGreetManyTimes(t *testing.T) {
 	count := 0
 
 	for {
-		_, err := resp.Recv()
+		_, err := res.Recv()
 
 		if err == io.EOF {
 			break

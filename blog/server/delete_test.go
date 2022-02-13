@@ -67,14 +67,14 @@ func TestDeleteError(t *testing.T) {
 			t.Error("Expected error")
 		}
 
-		respErr, ok := status.FromError(err)
+		e, ok := status.FromError(err)
 
 		if !ok {
 			t.Error("Expected error")
 		}
 
-		if respErr.Code() != codes.NotFound {
-			t.Errorf("Expected NotFound, got %v", respErr.Code().String())
+		if e.Code() != codes.NotFound {
+			t.Errorf("Expected NotFound, got %v", e.Code().String())
 		}
 	})
 }
