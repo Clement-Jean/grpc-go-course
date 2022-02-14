@@ -39,6 +39,8 @@ func main() {
 		opts = append(opts, grpc.Creds(creds))
 	}
 
+	opts = append(opts, grpc.ChainUnaryInterceptor(LogInterceptor(), CheckHeaderInterceptor()))
+
 	s := grpc.NewServer(opts...)
 	pb.RegisterGreetServiceServer(s, &server{})
 

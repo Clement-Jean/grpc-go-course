@@ -13,7 +13,7 @@ var addr string = "localhost:50051"
 
 func main() {
 	tls := false // change that to true if needed
-	var opts grpc.DialOption
+	opts := []grpc.DialOption{}
 
 	if tls {
 		certFile := "ssl/ca.crt"
@@ -22,12 +22,14 @@ func main() {
 			log.Fatalf("Error while loading CA trust certificate: %v", sslErr)
 			return
 		}
-		opts = grpc.WithTransportCredentials(creds)
+		opts = append(opts, grpc.WithTransportCredentials(creds))
 	} else {
-		opts = grpc.WithInsecure()
+		opts = append(opts, grpc.WithInsecure())
 	}
 
-	conn, err := grpc.Dial(addr, opts)
+	opts = append(opts, grpc.WithChainUnaryInterceptor(LogInterceptor(), AddHeaderInterceptor()))
+
+	conn, err := grpc.Dial(addr, opts...)
 
 	if err != nil {
 		log.Fatalf("Did not connect: %v", err)
@@ -41,5 +43,5 @@ func main() {
 	// doLongGreet(c)
 	// doGreetEveryone(c)
 	// doGreetWithDeadline(c, 5*time.Second)
-	//doGreetWithDeadline(c, 1*time.Second)
+	// doGreetWithDeadline(c, 1*time.Second)
 }
