@@ -19,6 +19,18 @@
 # Go workspace file
 go.work
 
+
 ## Protobuff
 
 *.pb.go
+
+
+## SSL
+*.crt
+*.key
+*.csr
+*.pem
+
+## Mac
+
+.DS_Store
