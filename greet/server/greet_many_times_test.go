@@ -7,11 +7,13 @@ import (
 
 	pb "github.com/Clement-Jean/grpc-go-course/greet/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func TestGreetManyTimes(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)

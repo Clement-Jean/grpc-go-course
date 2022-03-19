@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (*server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) {
+func (*Server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) {
 	log.Printf("CreateBlog function was invoked with %v\n", in)
 
-	data := blogItem{
+	data := BlogItem{
 		AuthorID: in.GetAuthorId(),
 		Title:    in.GetTitle(),
 		Content:  in.GetContent(),
@@ -29,15 +29,14 @@ func (*server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) 
 		)
 	}
 
-	oid, ok := res.InsertedID.(primitive.ObjectID)
-	if !ok {
+	if oid, ok := res.InsertedID.(primitive.ObjectID); !ok {
 		return nil, status.Errorf(
 			codes.Internal,
-			fmt.Sprintf("Cannot convert to OID"),
+			"Cannot convert to OID",
 		)
+	} else {
+		return &pb.BlogId{
+			Id: oid.Hex(),
+		}, nil
 	}
-
-	return &pb.BlogId{
-		Id: oid.Hex(),
-	}, nil
 }

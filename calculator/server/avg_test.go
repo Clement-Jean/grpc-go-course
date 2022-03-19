@@ -6,11 +6,13 @@ import (
 
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func TestAvg(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)

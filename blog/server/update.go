@@ -13,18 +13,18 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (*server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
+func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
 	log.Printf("UpdateBlog function was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.GetId())
 	if err != nil {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
-			fmt.Sprintf("Cannot parse ID"),
+			"Cannot parse ID",
 		)
 	}
 
-	data := &blogItem{
+	data := &BlogItem{
 		AuthorID: in.GetAuthorId(),
 		Content:  in.GetContent(),
 		Title:    in.GetTitle(),

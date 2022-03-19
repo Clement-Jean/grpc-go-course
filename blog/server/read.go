@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (*server) ReadBlog(ctx context.Context, in *pb.BlogId) (*pb.Blog, error) {
+func (*Server) ReadBlog(ctx context.Context, in *pb.BlogId) (*pb.Blog, error) {
 	log.Printf("ReadBlog function was invoked with %v\n", in.Id)
 
 	oid, err := primitive.ObjectIDFromHex(in.GetId())
@@ -20,11 +20,11 @@ func (*server) ReadBlog(ctx context.Context, in *pb.BlogId) (*pb.Blog, error) {
 	if err != nil {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
-			fmt.Sprintf("Cannot parse ID"),
+			"Cannot parse ID",
 		)
 	}
 
-	data := &blogItem{}
+	data := &BlogItem{}
 	filter := bson.M{"_id": oid}
 
 	res := collection.FindOne(ctx, filter)

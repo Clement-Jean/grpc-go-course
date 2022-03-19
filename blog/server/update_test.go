@@ -10,12 +10,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 )
 
 func TestUpdate(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)
@@ -28,7 +30,7 @@ func TestUpdate(t *testing.T) {
 
 	mt.Run("Success", func(mt *mtest.T) {
 		collection = mt.Coll
-		expectedBlog := &blogItem{
+		expectedBlog := &BlogItem{
 			ID:       primitive.NewObjectID(),
 			AuthorID: "not Clement",
 			Title:    "a new Title",
@@ -54,7 +56,8 @@ func TestUpdate(t *testing.T) {
 
 func TestUpdateError(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)
@@ -92,4 +95,34 @@ func TestUpdateError(t *testing.T) {
 			t.Errorf("Expected NotFound, got %v", e.Code().String())
 		}
 	})
+}
+
+func TestUpdateInvalidIDError(t *testing.T) {
+	ctx := context.Background()
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
+
+	if err != nil {
+		t.Fatalf("Failed to dial bufnet: %v", err)
+	}
+
+	defer conn.Close()
+	c := pb.NewBlogServiceClient(conn)
+	blog := &pb.Blog{}
+
+	_, err = c.UpdateBlog(context.Background(), blog)
+
+	if err == nil {
+		t.Error("Expected error")
+	}
+
+	e, ok := status.FromError(err)
+
+	if !ok {
+		t.Error("Expected error")
+	}
+
+	if e.Code() != codes.InvalidArgument {
+		t.Errorf("Expected InvalidArgument, got %v", e.Code().String())
+	}
 }

@@ -5,6 +5,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 
 	pb "github.com/Clement-Jean/grpc-go-course/greet/proto"
 )
@@ -24,7 +25,8 @@ func main() {
 		}
 		opts = append(opts, grpc.WithTransportCredentials(creds))
 	} else {
-		opts = append(opts, grpc.WithInsecure())
+		creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+		opts = append(opts, creds)
 	}
 
 	opts = append(opts, grpc.WithChainUnaryInterceptor(LogInterceptor(), AddHeaderInterceptor()))

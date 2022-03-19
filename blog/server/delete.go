@@ -12,14 +12,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (*server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error) {
+func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error) {
 	log.Printf("DeleteBlog function was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.GetId())
 	if err != nil {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
-			fmt.Sprintf("Cannot parse ID"),
+			"Cannot parse ID",
 		)
 	}
 

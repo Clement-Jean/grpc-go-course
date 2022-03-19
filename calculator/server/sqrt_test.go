@@ -7,12 +7,14 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 )
 
 func TestSqrt(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)
@@ -21,6 +23,10 @@ func TestSqrt(t *testing.T) {
 	defer conn.Close()
 	c := pb.NewCalculatorServiceClient(conn)
 	res, err := c.Sqrt(context.Background(), &pb.SqrtRequest{Number: 25})
+
+	if err != nil {
+		t.Errorf("Didn't expect any error, got: %v", err)
+	}
 
 	var expected float64 = 5
 
@@ -31,7 +37,8 @@ func TestSqrt(t *testing.T) {
 
 func TestSqrtError(t *testing.T) {
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	creds := grpc.WithTransportCredentials(insecure.NewCredentials())
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), creds)
 
 	if err != nil {
 		t.Fatalf("Failed to dial bufnet: %v", err)

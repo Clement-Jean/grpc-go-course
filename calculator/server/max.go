@@ -7,7 +7,7 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 )
 
-func (*server) Max(stream pb.CalculatorService_MaxServer) error {
+func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 	log.Println("Max function was invoked")
 	maximum := int32(0)
 

@@ -12,7 +12,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (*server) ListBlog(_ *emptypb.Empty, stream pb.BlogService_ListBlogServer) error {
+func (*Server) ListBlog(_ *emptypb.Empty, stream pb.BlogService_ListBlogServer) error {
 	log.Println("ListBlog function was invoked")
 
 	cur, err := collection.Find(context.Background(), primitive.D{{}})
@@ -25,7 +25,7 @@ func (*server) ListBlog(_ *emptypb.Empty, stream pb.BlogService_ListBlogServer) 
 	defer cur.Close(context.Background())
 
 	for cur.Next(context.Background()) {
-		data := &blogItem{}
+		data := &BlogItem{}
 		err := cur.Decode(data)
 
 		if err != nil {

@@ -7,7 +7,7 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/greet/proto"
 )
 
-func (*server) LongGreet(stream pb.GreetService_LongGreetServer) error {
+func (*Server) LongGreet(stream pb.GreetService_LongGreetServer) error {
 	log.Println("LongGreet function was invoked")
 
 	res := ""

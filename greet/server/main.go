@@ -1,3 +1,6 @@
+//go:build !test
+// +build !test
+
 package main
 
 import (
@@ -9,10 +12,6 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
-
-type server struct {
-	pb.GreetServiceServer
-}
 
 var addr string = "0.0.0.0:50051"
 
@@ -42,7 +41,7 @@ func main() {
 	opts = append(opts, grpc.ChainUnaryInterceptor(LogInterceptor(), CheckHeaderInterceptor()))
 
 	s := grpc.NewServer(opts...)
-	pb.RegisterGreetServiceServer(s, &server{})
+	pb.RegisterGreetServiceServer(s, &Server{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)

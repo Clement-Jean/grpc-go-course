@@ -1,3 +1,6 @@
+//go:build !test
+// +build !test
+
 package main
 
 import (
@@ -8,10 +11,6 @@ import (
 
 	"google.golang.org/grpc"
 )
-
-type server struct {
-	pb.CalculatorServiceServer
-}
 
 var addr string = "0.0.0.0:50052"
 
@@ -27,7 +26,7 @@ func main() {
 	opts := []grpc.ServerOption{}
 
 	s := grpc.NewServer(opts...)
-	pb.RegisterCalculatorServiceServer(s, &server{})
+	pb.RegisterCalculatorServiceServer(s, &Server{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)

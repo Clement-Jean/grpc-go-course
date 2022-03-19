@@ -7,7 +7,7 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 )
 
-func (*server) Avg(stream pb.CalculatorService_AvgServer) error {
+func (*Server) Avg(stream pb.CalculatorService_AvgServer) error {
 	log.Println("Avg function was invoked")
 
 	sum := int32(0)

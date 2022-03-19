@@ -7,7 +7,7 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/greet/proto"
 )
 
-func (*server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
+func (*Server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
 	log.Println("GreetEveryone function was invoked")
 
 	for {
