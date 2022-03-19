@@ -1,0 +1,23 @@
+name: Lint protobuf
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "**/*.proto"
+  pull_request:
+    branches: [ main ]
+    paths:
+      - "**/*.proto"
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v1
+
+      - name: Run protolint
+        uses: plexsystems/protolint-action@v0.4.0
+        with:
+          configDirectory: .protolint
