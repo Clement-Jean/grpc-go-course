@@ -33,9 +33,9 @@ jobs:
 
       - name: Generate pb.go
         run: |
-          cd greet && protoc proto/*.proto --go-grpc_out=. --go_out=. && cd ..
-          cd calculator && protoc proto/*.proto --go-grpc_out=. --go_out=. && cd ..
-          cd blog && protoc proto/*.proto --go-grpc_out=. --go_out=. && cd ..
+          cd greet && protoc proto/*.proto --go_opt=module=github.com/Clement-Jean/grpc-go-course --go-grpc_out=. --go_out=. && cd ..
+          cd calculator && protoc proto/*.proto --go_opt=module=github.com/Clement-Jean/grpc-go-course --go-grpc_out=. --go_out=. && cd ..
+          cd blog && protoc proto/*.proto --go_opt=module=github.com/Clement-Jean/grpc-go-course --go-grpc_out=. --go_out=. && cd ..
 
       - name: Build
         run: go build -v ./...
