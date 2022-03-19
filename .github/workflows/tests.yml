@@ -5,10 +5,12 @@ on:
     branches: [ master ]
     paths:
       - "**/*.go"
+      - "**/*.proto"
   pull_request:
     branches: [ master ]
     paths:
       - "**/*.go"
+      - "**/*.proto"
 
 jobs:
   build:
