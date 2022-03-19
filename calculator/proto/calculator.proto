@@ -8,7 +8,7 @@ import "proto/primes.proto";
 import "proto/sqrt.proto";
 import "proto/sum.proto";
 
-option go_package = "./proto";
+option go_package = "github.com/Clement-Jean/grpc-go-course/calculator/proto";
 
 service CalculatorService {
   rpc Sum(SumRequest) returns (SumResponse) {};

@@ -4,7 +4,7 @@ package blog;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "./proto";
+option go_package = "github.com/Clement-Jean/grpc-go-course/blog/proto";
 
 message Blog {
   string id = 1;

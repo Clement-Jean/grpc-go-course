@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package calculator;
-option go_package = "./proto";
+option go_package = "github.com/Clement-Jean/grpc-go-course/calculator/proto";
 
 message PrimeRequest {
   int64 number = 1;
