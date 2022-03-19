@@ -1,18 +1,19 @@
 syntax = "proto3";
 
 package calculator;
-option go_package = "./proto";
 
-import "proto/sum.proto";
-import "proto/primes.proto";
 import "proto/avg.proto";
 import "proto/max.proto";
+import "proto/primes.proto";
 import "proto/sqrt.proto";
+import "proto/sum.proto";
+
+option go_package = "./proto";
 
 service CalculatorService {
-    rpc Sum(SumRequest) returns (SumResponse) {};
-    rpc Primes(PrimeRequest) returns (stream PrimeResponse) {};
-    rpc Avg(stream AvgRequest) returns (AvgResponse) {};
-    rpc Max(stream MaxRequest) returns (stream MaxResponse) {};
-    rpc Sqrt(SqrtRequest) returns (SqrtResponse) {};
+  rpc Sum(SumRequest) returns (SumResponse) {};
+  rpc Primes(PrimeRequest) returns (stream PrimeResponse) {};
+  rpc Avg(stream AvgRequest) returns (AvgResponse) {};
+  rpc Max(stream MaxRequest) returns (stream MaxResponse) {};
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse) {};
 }

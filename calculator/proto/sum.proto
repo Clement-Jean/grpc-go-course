@@ -4,10 +4,10 @@ package calculator;
 option go_package = "./proto";
 
 message SumRequest {
-    int32 first_number = 1;
-    int32 second_number = 2;
+  int32 first_number = 1;
+  int32 second_number = 2;
 }
 
 message SumResponse {
-    int32 result = 1;
+  int32 result = 1;
 }

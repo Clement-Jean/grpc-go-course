@@ -7,20 +7,20 @@ import "google/protobuf/empty.proto";
 option go_package = "./proto";
 
 message Blog {
-    string id = 1;
-    string author_id = 2;
-    string title = 3;
-    string content = 4;
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
 }
 
 message BlogId {
-    string id = 1;
+  string id = 1;
 }
 
 service BlogService {
-    rpc CreateBlog(Blog) returns (BlogId) {};
-    rpc ReadBlog (BlogId) returns (Blog);
-    rpc UpdateBlog (Blog) returns (Blog);
-    rpc DeleteBlog (BlogId) returns (BlogId);
-    rpc ListBlog (google.protobuf.Empty) returns (stream Blog);
+  rpc CreateBlog(Blog) returns (BlogId) {};
+  rpc ReadBlog (BlogId) returns (Blog);
+  rpc UpdateBlog (Blog) returns (Blog);
+  rpc DeleteBlog (BlogId) returns (BlogId);
+  rpc ListBlog (google.protobuf.Empty) returns (stream Blog);
 }
