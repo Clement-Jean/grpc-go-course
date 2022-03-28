@@ -12,7 +12,21 @@ If this gives you an error, please follow instructions [here](https://github.com
 
 ## Run
 
+### `Linux/MacOS`
+
 ```shell
 chmod +x ssl.sh
 ./ssl.sh
+```
+
+### `Windows - Powershell`
+
+```powershell
+.\ssl.ps1
+```
+
+or, if you have a `SecurityError`:
+
+```powershell
+powershell -ExecutionPolicy unrestricted .\ssl.ps1
 ```
