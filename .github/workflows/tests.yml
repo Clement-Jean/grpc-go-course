@@ -38,28 +38,6 @@ jobs:
       - name: Test
         run: make test
 
-      - name: Change Cross-Platform badge on fail
-        if: ${{ failure() }}
-        run: |
-          sed -i "" 's/linux-brightgreen/linux-red/g' README.md
-          if [[ `git status --porcelain` ]]; then
-            git config --global user.name 'Clement Jean'
-            git config --global user.email 'Clement-Jean@users.noreply.github.com'
-            git add README.md
-            git commit -m "Cross-Platform build failed"
-            git push
-          fi
-      - name: Change Cross-Platform badge on success
-        if: ${{ success() }}
-        run: |
-          sed -i "" 's/linux-red/linux-brightgreen/g' README.md
-          if [[ `git status --porcelain` ]]; then
-            git config --global user.name 'Clement Jean'
-            git config --global user.email 'Clement-Jean@users.noreply.github.com'
-            git add README.md
-            git commit -m "Cross-Platform build succeeded"
-            git push
-          fi
   build-unix:
     runs-on: ${{ matrix.os }}
 
@@ -88,10 +66,13 @@ jobs:
       - name: Test
         run: make test
 
-      - name: Change Cross-Platform badge on fail
-        if: ${{ failure() }}
-        run: |
-          sed -i "" 's/linux-brightgreen/linux-red/g' README.md
+  red-cross-platform-badge:
+    needs: [build-win, build-unix]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - run: |
+          sed -i 's/linux-brightgreen/linux-red/g' README.md
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'Clement Jean'
             git config --global user.email 'Clement-Jean@users.noreply.github.com'
@@ -99,10 +80,14 @@ jobs:
             git commit -m "Cross-Platform build failed"
             git push
           fi
-      - name: Change Cross-Platform badge on success
-        if: ${{ success() }}
-        run: |
-          sed -i "" 's/linux-red/linux-brightgreen/g' README.md
+
+  green-cross-platform-badge:
+    needs: [build-win, build-unix]
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    steps:
+      - run: |
+          sed -i 's/linux-red/linux-brightgreen/g' README.md
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'Clement Jean'
             git config --global user.email 'Clement-Jean@users.noreply.github.com'
