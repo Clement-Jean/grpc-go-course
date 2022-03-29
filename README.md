@@ -6,7 +6,7 @@
 
 ### `Windows`
 
-- I recommend you use powershell or better the [VSCode Powershell plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell) for following this course, you might have unexepected behavior if you use Git bash or other (especially with OpenSSL)
+- I recommend you use powershell (try to update: [see](https://github.com/PowerShell/PowerShell/releases)) for following this course, you might have unexepected behavior if you use Git bash or other (especially with OpenSSL)
 - I recommend you use [Chocolatey](https://chocolatey.org/) as package installer (see [Install](https://chocolatey.org/install))
 
 
