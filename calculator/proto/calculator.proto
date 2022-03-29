@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package calculator;
 
-import "proto/avg.proto";
-import "proto/max.proto";
-import "proto/primes.proto";
-import "proto/sqrt.proto";
-import "proto/sum.proto";
+import "avg.proto";
+import "max.proto";
+import "primes.proto";
+import "sqrt.proto";
+import "sum.proto";
 
 option go_package = "github.com/Clement-Jean/grpc-go-course/calculator/proto";
 

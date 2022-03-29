@@ -19,11 +19,8 @@
 # Go workspace file
 go.work
 
-
-## Protobuff
-
+## Protobuf
 *.pb.go
-
 
 ## SSL
 *.crt
@@ -32,5 +29,9 @@ go.work
 *.pem
 
 ## Mac
-
 .DS_Store
+
+## Other
+bin
+.vscode
+TODO.md
