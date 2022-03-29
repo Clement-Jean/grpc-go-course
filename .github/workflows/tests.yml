@@ -71,6 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
+      - uses: actions/checkout@v2
       - run: |
           sed -i 's/linux-brightgreen/linux-red/g' README.md
           if [[ `git status --porcelain` ]]; then
@@ -86,6 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ success() }}
     steps:
+      - uses: actions/checkout@v2
       - run: |
           sed -i 's/linux-red/linux-brightgreen/g' README.md
           if [[ `git status --porcelain` ]]; then
