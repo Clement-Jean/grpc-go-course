@@ -35,9 +35,6 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
 
-      - name: Generate pb.go and build
-        run: make all
-
       - name: Test
         run: make test
   build-unix:
@@ -49,8 +46,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
           
-      - name: Install protoc
-        run: sudo apt install -y protobuf-compiler
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          version: '3.x'
 
       - name: Set up Go
         uses: actions/setup-go@v2
@@ -61,9 +60,6 @@ jobs:
         run: |
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
-
-      - name: Generate pb.go and build
-        run: make all
 
       - name: Test
         run: make test
