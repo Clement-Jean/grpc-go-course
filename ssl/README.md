@@ -8,7 +8,7 @@ Check if you already have OpenSSL installed:
 openssl version
 ```
 
-### If error
+### ⚠️ If error
 
 #### `Windows - Chocolatey`
 
