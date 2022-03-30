@@ -11,52 +11,45 @@ on:
       - "**/*.md"
 
 jobs:
-  build-win:
-    runs-on: windows-2022
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '^1.17'
-
-      - name: Install make
-        run: choco install make
-
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v1
-        with:
-          version: '3.x'
-
-      - name: Install proto-gen-go
-        run: go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-      
-      - name: Install gRPC Go plugins
-        run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
-
-      - name: Test
-        run: make test
-
-  build-unix:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-11]
+        os: [ubuntu-20.04, macos-11, windows-2022]
     steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '^1.17'
+
+      - id: go-cache-paths
+        run: |
+          echo "::set-output name=go-build::$(go env GOCACHE)"
+          echo "::set-output name=go-mod::$(go env GOMODCACHE)"
+
       - uses: actions/checkout@v2
-          
+
+      - name: Go Build Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.go-cache-paths.outputs.go-build }}
+          key: ${{ runner.os }}-go-build-${{ hashFiles(**/go.sum) }}
+
+      - name: Go Mod Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.go-cache-paths.outputs.go-mod }}
+          key: ${{ runner.os }}-go-mod-${{ hashFiles(**/go.sum) }}
+      
+      - name: Install make
+        run: choco install make
+        if: runner.os == 'Windows'
+
       - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
           version: '3.x'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '^1.17'
 
       - name: Install gRPC Go plugins
         run: |
@@ -67,7 +60,7 @@ jobs:
         run: make test
 
   red-cross-platform-badge:
-    needs: [build-win, build-unix]
+    needs: [build]
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
@@ -83,7 +76,7 @@ jobs:
           fi
 
   green-cross-platform-badge:
-    needs: [build-win, build-unix]
+    needs: [build]
     runs-on: ubuntu-latest
     if: ${{ success() }}
     steps:
