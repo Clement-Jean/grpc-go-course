@@ -10,7 +10,7 @@ import (
 func (s *Server) GreetManyTimes(in *pb.GreetRequest, stream pb.GreetService_GreetManyTimesServer) error {
 	log.Printf("GreetManyTimes function was invoked with %v\n", in)
 
-	firstName := in.GetFirstName()
+	firstName := in.FirstName
 
 	for i := 0; i < 10; i++ {
 		res := "Hello " + firstName + " number " + strconv.Itoa(i)

@@ -24,7 +24,6 @@ func (*Server) LongGreet(stream pb.GreetService_LongGreetServer) error {
 			log.Fatalf("Error while reading client stream: %v", err)
 		}
 
-		firstName := req.GetFirstName()
-		res += "Hello " + firstName + "!\n"
+		res += "Hello " + req.FirstName + "!\n"
 	}
 }

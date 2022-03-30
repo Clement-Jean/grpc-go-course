@@ -22,6 +22,7 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
+	defer lis.Close()
 	log.Printf("Listening at %s\n", addr)
 
 	opts := []grpc.ServerOption{}
@@ -43,6 +44,7 @@ func main() {
 	s := grpc.NewServer(opts...)
 	pb.RegisterGreetServiceServer(s, &Server{})
 
+	defer s.Stop()
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
 	}
