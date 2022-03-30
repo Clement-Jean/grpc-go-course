@@ -18,7 +18,7 @@ message BlogId {
 }
 
 service BlogService {
-  rpc CreateBlog(Blog) returns (BlogId) {};
+  rpc CreateBlog(Blog) returns (BlogId);
   rpc ReadBlog (BlogId) returns (Blog);
   rpc UpdateBlog (Blog) returns (Blog);
   rpc DeleteBlog (BlogId) returns (BlogId);

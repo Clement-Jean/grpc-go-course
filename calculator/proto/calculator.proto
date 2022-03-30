@@ -11,9 +11,9 @@ import "sum.proto";
 option go_package = "github.com/Clement-Jean/grpc-go-course/calculator/proto";
 
 service CalculatorService {
-  rpc Sum(SumRequest) returns (SumResponse) {};
-  rpc Primes(PrimeRequest) returns (stream PrimeResponse) {};
-  rpc Avg(stream AvgRequest) returns (AvgResponse) {};
-  rpc Max(stream MaxRequest) returns (stream MaxResponse) {};
-  rpc Sqrt(SqrtRequest) returns (SqrtResponse) {};
+  rpc Sum(SumRequest) returns (SumResponse);
+  rpc Primes(PrimeRequest) returns (stream PrimeResponse);
+  rpc Avg(stream AvgRequest) returns (AvgResponse);
+  rpc Max(stream MaxRequest) returns (stream MaxResponse);
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse);
 }
