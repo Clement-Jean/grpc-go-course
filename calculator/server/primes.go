@@ -18,7 +18,7 @@ func (*Server) Primes(in *pb.PrimeRequest, stream pb.CalculatorService_PrimesSer
 				Result: divisor,
 			})
 
-			number = number / divisor
+			number /= divisor
 		} else {
 			divisor++
 		}

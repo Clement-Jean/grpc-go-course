@@ -18,7 +18,6 @@ func LogInterceptor() grpc.UnaryClientInterceptor {
 			log.Printf("Sending headers: %v\n", headers)
 		}
 
-		err := invoker(ctx, method, req, reply, cc, opts...)
-		return err
+		return invoker(ctx, method, req, reply, cc, opts...)
 	}
 }

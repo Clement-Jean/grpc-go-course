@@ -12,7 +12,7 @@ func AddHeaderInterceptor() grpc.UnaryClientInterceptor {
 		send, _ := metadata.FromOutgoingContext(ctx)
 		newMD := metadata.Pairs("authorization", "aDummyToken")
 		ctx = metadata.NewOutgoingContext(ctx, metadata.Join(send, newMD))
-		err := invoker(ctx, method, req, reply, cc, opts...)
-		return err
+
+		return invoker(ctx, method, req, reply, cc, opts...)
 	}
 }

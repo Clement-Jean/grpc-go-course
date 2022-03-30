@@ -23,9 +23,7 @@ func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 			return err
 		}
 
-		number := req.Number
-
-		if number > maximum {
+		if number := req.Number; number > maximum {
 			maximum = number
 			sendErr := stream.Send(&pb.MaxResponse{
 				Result: maximum,
