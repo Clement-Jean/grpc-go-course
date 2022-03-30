@@ -15,7 +15,7 @@ import (
 func (*Server) ReadBlog(ctx context.Context, in *pb.BlogId) (*pb.Blog, error) {
 	log.Printf("ReadBlog function was invoked with %v\n", in.Id)
 
-	oid, err := primitive.ObjectIDFromHex(in.GetId())
+	oid, err := primitive.ObjectIDFromHex(in.Id)
 
 	if err != nil {
 		return nil, status.Errorf(

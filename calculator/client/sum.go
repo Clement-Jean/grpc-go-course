@@ -15,5 +15,5 @@ func doSum(c pb.CalculatorServiceClient) {
 		log.Fatalf("Could not sum: %v", err)
 	}
 
-	log.Printf("Sum: %d", r.GetResult())
+	log.Printf("Sum: %d\n", r.Result)
 }

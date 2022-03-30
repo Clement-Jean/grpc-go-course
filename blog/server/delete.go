@@ -15,7 +15,7 @@ import (
 func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error) {
 	log.Printf("DeleteBlog function was invoked with %v\n", in)
 
-	oid, err := primitive.ObjectIDFromHex(in.GetId())
+	oid, err := primitive.ObjectIDFromHex(in.Id)
 	if err != nil {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
@@ -41,5 +41,5 @@ func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error
 		)
 	}
 
-	return &pb.BlogId{Id: in.GetId()}, nil
+	return &pb.BlogId{Id: in.Id}, nil
 }

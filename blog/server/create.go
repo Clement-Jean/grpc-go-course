@@ -16,9 +16,9 @@ func (*Server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) 
 	log.Printf("CreateBlog function was invoked with %v\n", in)
 
 	data := BlogItem{
-		AuthorID: in.GetAuthorId(),
-		Title:    in.GetTitle(),
-		Content:  in.GetContent(),
+		AuthorID: in.AuthorId,
+		Title:    in.Title,
+		Content:  in.Content,
 	}
 
 	res, err := collection.InsertOne(ctx, data)

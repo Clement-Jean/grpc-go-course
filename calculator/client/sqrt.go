@@ -29,5 +29,5 @@ func doSqrt(c pb.CalculatorServiceClient, n int32) {
 		}
 	}
 
-	log.Printf("Result of square root of %v: %v\n", n, res.GetResult())
+	log.Printf("Result of square root of %v: %v\n", n, res.Result)
 }

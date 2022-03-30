@@ -30,5 +30,5 @@ func doAvg(c pb.CalculatorServiceClient) {
 		log.Fatalf("Error while receiving response: %v", err)
 	}
 
-	log.Printf("The Average is: %v\n", res.GetResult())
+	log.Printf("The Average is: %v\n", res.Result)
 }

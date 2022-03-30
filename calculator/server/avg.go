@@ -26,7 +26,7 @@ func (*Server) Avg(stream pb.CalculatorService_AvgServer) error {
 			log.Fatalf("Error while reading client stream: %v", err)
 		}
 
-		sum += req.GetNumber()
+		sum += req.Number
 		count++
 	}
 }

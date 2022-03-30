@@ -9,7 +9,7 @@ import (
 func (*Server) Primes(in *pb.PrimeRequest, stream pb.CalculatorService_PrimesServer) error {
 	log.Printf("Primes function was invoked with %v\n", in)
 
-	number := in.GetNumber()
+	number := in.Number
 	divisor := int64(2)
 
 	for number > 1 {

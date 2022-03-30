@@ -33,6 +33,6 @@ func doGreetManyTimes(c pb.GreetServiceClient) {
 			log.Fatalf("error while reading stream: %v", err)
 		}
 
-		log.Printf("Response from GreetManyTimes: %v", msg.GetResult())
+		log.Printf("Response from GreetManyTimes: %v", msg.Result)
 	}
 }

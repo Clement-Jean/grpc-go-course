@@ -51,7 +51,7 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 				log.Fatalf("Error while receiving: %v", err)
 				break
 			}
-			log.Printf("Received: %v\n", res.GetResult())
+			log.Printf("Received: %v\n", res.Result)
 		}
 		close(waitc)
 	}()

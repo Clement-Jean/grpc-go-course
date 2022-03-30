@@ -16,7 +16,7 @@ import (
 func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
 	log.Printf("UpdateBlog function was invoked with %v\n", in)
 
-	oid, err := primitive.ObjectIDFromHex(in.GetId())
+	oid, err := primitive.ObjectIDFromHex(in.Id)
 	if err != nil {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
@@ -25,9 +25,9 @@ func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
 	}
 
 	data := &BlogItem{
-		AuthorID: in.GetAuthorId(),
-		Content:  in.GetContent(),
-		Title:    in.GetTitle(),
+		AuthorID: in.AuthorId,
+		Title:    in.Title,
+		Content:  in.Content,
 	}
 	res := collection.FindOneAndUpdate(
 		ctx,

@@ -14,7 +14,7 @@ import (
 func (*Server) Sqrt(ctx context.Context, req *pb.SqrtRequest) (*pb.SqrtResponse, error) {
 	log.Printf("Sqrt function was invoked with number %d\n", req.Number)
 
-	number := req.GetNumber()
+	number := req.Number
 
 	if number < 0 {
 		return nil, status.Errorf(

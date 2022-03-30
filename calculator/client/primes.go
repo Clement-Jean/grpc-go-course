@@ -30,6 +30,6 @@ func doPrimes(c pb.CalculatorServiceClient) {
 			log.Fatalf("Something happened: %v", err)
 		}
 
-		log.Println(res.GetResult())
+		log.Println(res.Result)
 	}
 }

@@ -57,7 +57,7 @@ func TestMax(t *testing.T) {
 				break
 			}
 
-			maximum = res.GetResult()
+			maximum = res.Result
 		}
 		close(waitc)
 	}()

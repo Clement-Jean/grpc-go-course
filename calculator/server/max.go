@@ -23,7 +23,7 @@ func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 			return err
 		}
 
-		number := req.GetNumber()
+		number := req.Number
 
 		if number > maximum {
 			maximum = number

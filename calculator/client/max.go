@@ -46,8 +46,7 @@ func doMax(c pb.CalculatorServiceClient) {
 				break
 			}
 
-			maximum := res.GetResult()
-			log.Printf("Received a new maximum of...: %v\n", maximum)
+			log.Printf("Received a new maximum of...: %v\n", res.Result)
 		}
 		close(waitc)
 	}()
