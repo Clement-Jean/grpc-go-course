@@ -17,7 +17,6 @@ func doGreetWithDeadline(c pb.GreetServiceClient, timeout time.Duration) {
 
 	req := &pb.GreetRequest{
 		FirstName: "Clement",
-		LastName:  "Jean",
 	}
 	res, err := c.GreetWithDeadline(ctx, req)
 	if err != nil {

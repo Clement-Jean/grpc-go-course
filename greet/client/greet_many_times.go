@@ -13,13 +13,12 @@ func doGreetManyTimes(c pb.GreetServiceClient) {
 
 	req := &pb.GreetRequest{
 		FirstName: "Clement",
-		LastName:  "Jean",
 	}
 
 	resStream, err := c.GreetManyTimes(context.Background(), req)
 
 	if err != nil {
-		log.Fatalf("error while calling GreetManyTimes RPC: %v", err)
+		log.Fatalf("error while calling GreetManyTimes RPC: %v\n", err)
 	}
 
 	for {
@@ -30,9 +29,9 @@ func doGreetManyTimes(c pb.GreetServiceClient) {
 		}
 
 		if err != nil {
-			log.Fatalf("error while reading stream: %v", err)
+			log.Fatalf("error while reading stream: %v\n", err)
 		}
 
-		log.Printf("Response from GreetManyTimes: %v", msg.Result)
+		log.Printf("GreetManyTimes: %s\n", msg.Result)
 	}
 }

@@ -27,7 +27,6 @@ func TestGreetWithDeadline(t *testing.T) {
 
 	req := &pb.GreetRequest{
 		FirstName: "Clement",
-		LastName:  "Jean",
 	}
 	res, err := c.GreetWithDeadline(ctx, req)
 
@@ -57,7 +56,6 @@ func TestGreetWithDeadlineExceeded(t *testing.T) {
 
 	req := &pb.GreetRequest{
 		FirstName: "Clement",
-		LastName:  "Jean",
 	}
 	_, err = c.GreetWithDeadline(ctx, req)
 

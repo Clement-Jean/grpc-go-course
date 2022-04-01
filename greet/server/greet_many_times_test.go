@@ -24,7 +24,6 @@ func TestGreetManyTimes(t *testing.T) {
 
 	req := &pb.GreetRequest{
 		FirstName: "Clement",
-		LastName:  "Jean",
 	}
 
 	res, err := c.GreetManyTimes(context.Background(), req)
