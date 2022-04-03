@@ -31,10 +31,10 @@ func main() {
 	if tls {
 		certFile := "ssl/server.crt"
 		keyFile := "ssl/server.pem"
-		creds, sslErr := credentials.NewServerTLSFromFile(certFile, keyFile)
-		if sslErr != nil {
-			log.Fatalf("Failed loading certificates: %v", sslErr)
-			return
+		creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
+
+		if err != nil {
+			log.Fatalf("Failed loading certificates: %v\n", err)
 		}
 		opts = append(opts, grpc.Creds(creds))
 	}
@@ -46,6 +46,6 @@ func main() {
 
 	defer s.Stop()
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
+		log.Fatalf("Failed to serve: %v\n", err)
 	}
 }
