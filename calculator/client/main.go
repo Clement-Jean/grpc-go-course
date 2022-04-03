@@ -9,7 +9,7 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 )
 
-var addr string = "localhost:50052"
+var addr string = "localhost:50051"
 
 func main() {
 	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
