@@ -15,7 +15,7 @@ func doMax(c pb.CalculatorServiceClient) {
 	stream, err := c.Max(context.Background())
 
 	if err != nil {
-		log.Fatalf("Error while opening stream and calling FindMaximum: %v", err)
+		log.Fatalf("Error while opening stream: %v\n", err)
 	}
 
 	waitc := make(chan struct{})
@@ -23,12 +23,12 @@ func doMax(c pb.CalculatorServiceClient) {
 	go func() {
 		numbers := []int32{4, 7, 2, 19, 4, 6, 32}
 		for _, number := range numbers {
-			log.Printf("Sending number: %v\n", number)
+			log.Printf("Sending number: %d\n", number)
 			stream.Send(&pb.MaxRequest{
 				Number: number,
 			})
 
-			time.Sleep(1000 * time.Millisecond)
+			time.Sleep(1 * time.Second)
 		}
 		stream.CloseSend()
 	}()

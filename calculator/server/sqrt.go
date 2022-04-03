@@ -19,7 +19,7 @@ func (*Server) Sqrt(ctx context.Context, req *pb.SqrtRequest) (*pb.SqrtResponse,
 	if number < 0 {
 		return nil, status.Errorf(
 			codes.InvalidArgument,
-			fmt.Sprintf("Received a negative number: %v", number),
+			fmt.Sprintf("Received a negative number: %d", number),
 		)
 	}
 

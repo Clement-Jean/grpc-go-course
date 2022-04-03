@@ -9,7 +9,7 @@ import (
 
 func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 	log.Println("Max function was invoked")
-	maximum := int32(0)
+	var maximum int32 = 0
 
 	for {
 		req, err := stream.Recv()
@@ -20,7 +20,6 @@ func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 
 		if err != nil {
 			log.Fatalf("Error while reading client stream: %v", err)
-			return err
 		}
 
 		if number := req.Number; number > maximum {
@@ -31,7 +30,6 @@ func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 
 			if sendErr != nil {
 				log.Fatalf("Error while sending data to client: %v", sendErr)
-				return sendErr
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import (
 )
 
 func doSqrt(c pb.CalculatorServiceClient, n int32) {
+	log.Println("doSqrt was invoked")
 	res, err := c.Sqrt(context.Background(), &pb.SqrtRequest{Number: n})
 
 	if err != nil {
@@ -24,10 +25,9 @@ func doSqrt(c pb.CalculatorServiceClient, n int32) {
 				return
 			}
 		} else {
-			log.Fatalf("Big Error calling SquareRoot: %v", err)
-			return
+			log.Fatalf("A non gRPC error: %v\n", err)
 		}
 	}
 
-	log.Printf("Result of square root of %v: %v\n", n, res.Result)
+	log.Printf("Sqrt of %d: %f\n", n, res.Result)
 }
