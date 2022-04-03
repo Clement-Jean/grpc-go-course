@@ -10,9 +10,10 @@ import (
 	pb "github.com/Clement-Jean/grpc-go-course/calculator/proto"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
-var addr string = "0.0.0.0:50052"
+var addr string = "0.0.0.0:50051"
 
 func main() {
 	lis, err := net.Listen("tcp", addr)
@@ -27,6 +28,7 @@ func main() {
 
 	s := grpc.NewServer(opts...)
 	pb.RegisterCalculatorServiceServer(s, &Server{})
+	reflection.Register(s)
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
