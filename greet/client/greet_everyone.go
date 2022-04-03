@@ -16,19 +16,12 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 
 	if err != nil {
 		log.Fatalf("Error while creating stream: %v", err)
-		return
 	}
 
 	requests := []*pb.GreetRequest{
-		{
-			FirstName: "Clement",
-		},
-		{
-			FirstName: "Marie",
-		},
-		{
-			FirstName: "Test",
-		},
+		{FirstName: "Clement"},
+		{FirstName: "Marie"},
+		{FirstName: "Test"},
 	}
 
 	waitc := make(chan struct{})
@@ -36,7 +29,7 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 		for _, req := range requests {
 			log.Printf("Sending message: %v\n", req)
 			stream.Send(req)
-			time.Sleep(1000 * time.Millisecond)
+			time.Sleep(1 * time.Second)
 		}
 		stream.CloseSend()
 	}()
@@ -48,7 +41,7 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 				break
 			}
 			if err != nil {
-				log.Fatalf("Error while receiving: %v", err)
+				log.Printf("Error while receiving: %v", err)
 				break
 			}
 			log.Printf("Received: %v\n", res.Result)

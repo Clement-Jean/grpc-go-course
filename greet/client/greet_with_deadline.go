@@ -19,19 +19,20 @@ func doGreetWithDeadline(c pb.GreetServiceClient, timeout time.Duration) {
 		FirstName: "Clement",
 	}
 	res, err := c.GreetWithDeadline(ctx, req)
-	if err != nil {
 
-		statusErr, ok := status.FromError(err)
+	if err != nil {
+		e, ok := status.FromError(err)
 		if ok {
-			if statusErr.Code() == codes.DeadlineExceeded {
-				log.Println("Timeout was hit! Deadline was exceeded")
+			if e.Code() == codes.DeadlineExceeded {
+				log.Println("Deadline exceeded!")
+				return
 			} else {
-				log.Printf("unexpected error: %v", statusErr)
+				log.Fatalf("Unexpected gRPC error: %v\n", e)
 			}
 		} else {
-			log.Fatalf("error while calling GreetWithDeadline RPC: %v", err)
+			log.Fatalf("A non gRPC error: %v\n", err)
 		}
-		return
 	}
-	log.Printf("Response from GreetWithDeadline: %v", res.Result)
+
+	log.Printf("GreetWithDeadline: %s\n", res.Result)
 }

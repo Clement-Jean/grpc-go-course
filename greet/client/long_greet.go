@@ -11,24 +11,18 @@ import (
 func doLongGreet(c pb.GreetServiceClient) {
 	log.Println("doLongGreet was invoked")
 
-	requests := []*pb.GreetRequest{
-		{
-			FirstName: "Clement",
-		},
-		{
-			FirstName: "Marie",
-		},
-		{
-			FirstName: "Test",
-		},
+	reqs := []*pb.GreetRequest{
+		{FirstName: "Clement"},
+		{FirstName: "Marie"},
+		{FirstName: "Test"},
 	}
 
 	stream, err := c.LongGreet(context.Background())
 	if err != nil {
-		log.Fatalf("error while calling LongGreet: %v", err)
+		log.Fatalf("Error while calling LongGreet: %v", err)
 	}
 
-	for _, req := range requests {
+	for _, req := range reqs {
 		log.Printf("Sending req: %v\n", req)
 		stream.Send(req)
 		time.Sleep(1000 * time.Millisecond)
@@ -36,7 +30,8 @@ func doLongGreet(c pb.GreetServiceClient) {
 
 	res, err := stream.CloseAndRecv()
 	if err != nil {
-		log.Fatalf("error while receiving response from LongGreet: %v", err)
+		log.Fatalf("Error while receiving response from LongGreet: %v", err)
 	}
-	log.Printf("LongGreet Response: %v\n", res)
+
+	log.Printf("LongGreet: %s\n", res.Result)
 }

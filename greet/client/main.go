@@ -18,10 +18,10 @@ func main() {
 
 	if tls {
 		certFile := "ssl/ca.crt"
-		creds, sslErr := credentials.NewClientTLSFromFile(certFile, "")
-		if sslErr != nil {
-			log.Fatalf("Error while loading CA trust certificate: %v", sslErr)
-			return
+		creds, err := credentials.NewClientTLSFromFile(certFile, "")
+
+		if err != nil {
+			log.Fatalf("Error while loading CA trust certificate: %v\n", err)
 		}
 		opts = append(opts, grpc.WithTransportCredentials(creds))
 	} else {

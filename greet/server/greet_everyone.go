@@ -19,11 +19,9 @@ func (*Server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
 
 		if err != nil {
 			log.Fatalf("Error while reading client stream: %v", err)
-			return err
 		}
 
-		firstName := req.FirstName
-		res := "Hello " + firstName + "!"
+		res := "Hello " + req.FirstName + "!"
 
 		sendErr := stream.Send(&pb.GreetResponse{
 			Result: res,
@@ -31,7 +29,6 @@ func (*Server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
 
 		if sendErr != nil {
 			log.Fatalf("Error while sending data to client: %v", sendErr)
-			return sendErr
 		}
 	}
 }
