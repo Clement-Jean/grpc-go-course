@@ -5,10 +5,12 @@ on:
     branches: [ master ]
     paths-ignore:
       - "**/*.md"
+      - "**/udemy.yml"
   pull_request:
     branches: [ master ]
     paths-ignore:
       - "**/*.md"
+      - "**/udemy.yml"
 
 jobs:
   build:
