@@ -16,7 +16,7 @@ func documentToBlog(data *BlogItem) *pb.Blog {
 	return &pb.Blog{
 		Id:       data.ID.Hex(),
 		AuthorId: data.AuthorID,
-		Content:  data.Content,
 		Title:    data.Title,
+		Content:  data.Content,
 	}
 }

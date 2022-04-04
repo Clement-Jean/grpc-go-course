@@ -11,9 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
+func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*emptypb.Empty, error) {
 	log.Printf("UpdateBlog function was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.Id)
@@ -43,5 +44,5 @@ func (*Server) UpdateBlog(ctx context.Context, in *pb.Blog) (*pb.Blog, error) {
 		)
 	}
 
-	return documentToBlog(data), nil
+	return &emptypb.Empty{}, nil
 }

@@ -10,9 +10,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error) {
+func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*emptypb.Empty, error) {
 	log.Printf("DeleteBlog function was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.Id)
@@ -41,5 +42,5 @@ func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*pb.BlogId, error
 		)
 	}
 
-	return &pb.BlogId{Id: in.Id}, nil
+	return &emptypb.Empty{}, nil
 }

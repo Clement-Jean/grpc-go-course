@@ -23,7 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = client.Connect(context.TODO())
+	err = client.Connect(context.Background())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,17 +33,15 @@ func main() {
 	lis, err := net.Listen("tcp", addr)
 
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("Failed to listen: %v\n", err)
 	}
 
 	log.Printf("Listening at %s\n", addr)
 
-	opts := []grpc.ServerOption{}
-
-	s := grpc.NewServer(opts...)
+	s := grpc.NewServer()
 	pb.RegisterBlogServiceServer(s, &Server{})
 
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
+		log.Fatalf("Failed to serve: %v\n", err)
 	}
 }

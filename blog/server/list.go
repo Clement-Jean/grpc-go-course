@@ -12,7 +12,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (*Server) ListBlog(_ *emptypb.Empty, stream pb.BlogService_ListBlogServer) error {
+func (*Server) ListBlogs(_ *emptypb.Empty, stream pb.BlogService_ListBlogsServer) error {
 	log.Println("ListBlog function was invoked")
 
 	cur, err := collection.Find(context.Background(), primitive.D{{}})

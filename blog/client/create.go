@@ -8,7 +8,7 @@ import (
 )
 
 func createBlog(c pb.BlogServiceClient) string {
-	log.Println("createBlog was invoked")
+	log.Println("----createBlog was invoked----")
 
 	blog := &pb.Blog{
 		AuthorId: "Clement",
@@ -19,9 +19,9 @@ func createBlog(c pb.BlogServiceClient) string {
 	res, err := c.CreateBlog(context.Background(), blog)
 
 	if err != nil {
-		log.Fatalf("Unexpected error: %v", err)
+		log.Fatalf("Unexpected error: %v\n", err)
 	}
 
-	log.Printf("Blog has been created: %v", res)
+	log.Printf("Blog has been created: %v\n", res)
 	return res.Id
 }

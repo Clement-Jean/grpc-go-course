@@ -45,7 +45,7 @@ func TestList(t *testing.T) {
 		killCursors := mtest.CreateCursorResponse(0, "foo.bar", mtest.NextBatch)
 		mt.AddMockResponses(first, second, killCursors)
 
-		stream, err := c.ListBlog(context.Background(), &emptypb.Empty{})
+		stream, err := c.ListBlogs(context.Background(), &emptypb.Empty{})
 
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
