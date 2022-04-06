@@ -6,12 +6,15 @@ package main
 import (
 	"log"
 	"net"
+	"time"
 
 	pb "github.com/Clement-Jean/grpc-go-course/greet/proto"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
+
+var greetWithDeadlineTime time.Duration = 1 * time.Second
 
 var addr string = "0.0.0.0:50051"
 

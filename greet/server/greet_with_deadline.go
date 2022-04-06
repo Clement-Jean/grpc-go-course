@@ -18,7 +18,7 @@ func (*Server) GreetWithDeadline(ctx context.Context, in *pb.GreetRequest) (*pb.
 			log.Println("The client canceled the request!")
 			return nil, status.Error(codes.Canceled, "The client canceled the request")
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(greetWithDeadlineTime)
 	}
 
 	return &pb.GreetResponse{
