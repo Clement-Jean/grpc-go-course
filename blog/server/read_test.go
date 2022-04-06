@@ -37,17 +37,17 @@ func TestRead(t *testing.T) {
 			Content:  "Content !",
 		}
 		mt.AddMockResponses(mtest.CreateCursorResponse(1, "foo.bar", mtest.FirstBatch, bson.D{
-			{"_id", expectedBlog.ID},
-			{"author_id", expectedBlog.AuthorID},
-			{"title", expectedBlog.Title},
-			{"content", expectedBlog.Content},
+			{Key: "_id", Value: expectedBlog.ID},
+			{Key: "author_id", Value: expectedBlog.AuthorID},
+			{Key: "title", Value: expectedBlog.Title},
+			{Key: "content", Value: expectedBlog.Content},
 		}))
 
-		blogId := &pb.BlogId{
+		blogID := &pb.BlogId{
 			Id: expectedBlog.ID.Hex(),
 		}
 
-		_, err := c.ReadBlog(context.Background(), blogId)
+		_, err := c.ReadBlog(context.Background(), blogID)
 
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
@@ -71,13 +71,13 @@ func TestReadError(t *testing.T) {
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
-		mt.AddMockResponses(bson.D{{"error", 0}})
+		mt.AddMockResponses(bson.D{{Key: "error", Value: 0}})
 
-		blogId := &pb.BlogId{
+		blogID := &pb.BlogId{
 			Id: primitive.NewObjectID().Hex(),
 		}
 
-		_, err := c.ReadBlog(context.Background(), blogId)
+		_, err := c.ReadBlog(context.Background(), blogID)
 
 		if err == nil {
 			t.Error("Expected error")
@@ -106,9 +106,9 @@ func TestReadInvalidIDError(t *testing.T) {
 
 	defer conn.Close()
 	c := pb.NewBlogServiceClient(conn)
-	blogId := &pb.BlogId{}
+	blogID := &pb.BlogId{}
 
-	_, err = c.ReadBlog(context.Background(), blogId)
+	_, err = c.ReadBlog(context.Background(), blogID)
 
 	if err == nil {
 		t.Error("Expected error")

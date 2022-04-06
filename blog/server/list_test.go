@@ -31,16 +31,16 @@ func TestList(t *testing.T) {
 	mt.Run("Success", func(mt *mtest.T) {
 		collection = mt.Coll
 		first := mtest.CreateCursorResponse(1, "foo.bar", mtest.FirstBatch, bson.D{
-			{"_id", primitive.NewObjectID()},
-			{"author_id", "Clement"},
-			{"title", "a title"},
-			{"content", "a content"},
+			{Key: "_id", Value: primitive.NewObjectID()},
+			{Key: "author_id", Value: "Clement"},
+			{Key: "title", Value: "a title"},
+			{Key: "content", Value: "a content"},
 		})
 		second := mtest.CreateCursorResponse(1, "foo.bar", mtest.NextBatch, bson.D{
-			{"_id", primitive.NewObjectID()},
-			{"author_id", "not Clement"},
-			{"title", "another title"},
-			{"content", "another content"},
+			{Key: "_id", Value: primitive.NewObjectID()},
+			{Key: "author_id", Value: "not Clement"},
+			{Key: "title", Value: "another title"},
+			{Key: "content", Value: "another content"},
 		})
 		killCursors := mtest.CreateCursorResponse(0, "foo.bar", mtest.NextBatch)
 		mt.AddMockResponses(first, second, killCursors)

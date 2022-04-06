@@ -30,12 +30,16 @@ func TestDelete(t *testing.T) {
 
 	mt.Run("Success", func(mt *mtest.T) {
 		collection = mt.Coll
-		blogId := &pb.BlogId{
+		blogID := &pb.BlogId{
 			Id: primitive.NewObjectID().Hex(),
 		}
-		mt.AddMockResponses(bson.D{{"ok", 1}, {"acknowledged", true}, {"n", 1}})
+		mt.AddMockResponses(bson.D{
+			{Key: "ok", Value: 1},
+			{Key: "acknowledged", Value: true},
+			{Key: "n", Value: 1},
+		})
 
-		_, err := c.DeleteBlog(context.Background(), blogId)
+		_, err := c.DeleteBlog(context.Background(), blogID)
 
 		if err != nil {
 			t.Errorf("Unexpected error: %v", err)
@@ -59,12 +63,16 @@ func TestDeleteCountZeroError(t *testing.T) {
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
-		blogId := &pb.BlogId{
+		blogID := &pb.BlogId{
 			Id: primitive.NewObjectID().Hex(),
 		}
-		mt.AddMockResponses(bson.D{{"ok", 1}, {"acknowledged", true}, {"n", 0}})
+		mt.AddMockResponses(bson.D{
+			{Key: "ok", Value: 1},
+			{Key: "acknowledged", Value: true},
+			{Key: "n", Value: 0},
+		})
 
-		_, err := c.DeleteBlog(context.Background(), blogId)
+		_, err := c.DeleteBlog(context.Background(), blogID)
 
 		if err == nil {
 			t.Error("Expected error")
@@ -98,12 +106,12 @@ func TestDeleteOneError(t *testing.T) {
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
-		blogId := &pb.BlogId{
+		blogID := &pb.BlogId{
 			Id: primitive.NewObjectID().Hex(),
 		}
 		mt.AddMockResponses(mtest.CreateCommandErrorResponse(mtest.CommandError{}))
 
-		_, err := c.DeleteBlog(context.Background(), blogId)
+		_, err := c.DeleteBlog(context.Background(), blogID)
 
 		if err == nil {
 			t.Error("Expected error")
@@ -132,9 +140,9 @@ func TestDeleteInvalidIDError(t *testing.T) {
 
 	defer conn.Close()
 	c := pb.NewBlogServiceClient(conn)
-	blogId := &pb.BlogId{}
+	blogID := &pb.BlogId{}
 
-	_, err = c.DeleteBlog(context.Background(), blogId)
+	_, err = c.DeleteBlog(context.Background(), blogID)
 
 	if err == nil {
 		t.Error("Expected error")

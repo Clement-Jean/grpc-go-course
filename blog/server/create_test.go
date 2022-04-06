@@ -62,7 +62,7 @@ func TestCreateError(t *testing.T) {
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
-		mt.AddMockResponses(bson.D{{"error", 0}})
+		mt.AddMockResponses(bson.D{{Key: "error", Value: 0}})
 
 		blog := &pb.Blog{
 			AuthorId: "Clement",
