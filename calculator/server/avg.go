@@ -8,7 +8,7 @@ import (
 )
 
 func (*Server) Avg(stream pb.CalculatorService_AvgServer) error {
-	log.Println("Avg function was invoked")
+	log.Println("Avg was invoked")
 
 	var sum int32 = 0
 	count := 0

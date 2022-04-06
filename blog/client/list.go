@@ -10,7 +10,7 @@ import (
 )
 
 func listBlog(c pb.BlogServiceClient) {
-	log.Println("----listBlog was invoked----")
+	log.Println("---listBlog was invoked---")
 	stream, err := c.ListBlogs(context.Background(), &emptypb.Empty{})
 
 	if err != nil {

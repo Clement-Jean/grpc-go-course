@@ -8,7 +8,7 @@ import (
 )
 
 func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
-	log.Println("Max function was invoked")
+	log.Println("Max was invoked")
 	var maximum int32 = 0
 
 	for {

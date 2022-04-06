@@ -8,7 +8,7 @@ import (
 )
 
 func (*Server) LongGreet(stream pb.GreetService_LongGreetServer) error {
-	log.Println("LongGreet function was invoked")
+	log.Println("LongGreet was invoked")
 
 	res := ""
 

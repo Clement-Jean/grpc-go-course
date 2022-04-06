@@ -13,7 +13,7 @@ import (
 )
 
 func (*Server) ReadBlog(ctx context.Context, in *pb.BlogId) (*pb.Blog, error) {
-	log.Printf("ReadBlog function was invoked with %v\n", in.Id)
+	log.Printf("ReadBlog was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.Id)
 

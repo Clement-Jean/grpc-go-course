@@ -13,7 +13,7 @@ import (
 )
 
 func (*Server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) {
-	log.Printf("CreateBlog function was invoked with %v\n", in)
+	log.Printf("CreateBlog was invoked with %v\n", in)
 
 	data := BlogItem{
 		AuthorID: in.AuthorId,
@@ -29,14 +29,16 @@ func (*Server) CreateBlog(ctx context.Context, in *pb.Blog) (*pb.BlogId, error) 
 		)
 	}
 
-	if oid, ok := res.InsertedID.(primitive.ObjectID); !ok {
+	oid, ok := res.InsertedID.(primitive.ObjectID)
+
+	if !ok {
 		return nil, status.Errorf(
 			codes.Internal,
 			"Cannot convert to OID",
 		)
-	} else {
-		return &pb.BlogId{
-			Id: oid.Hex(),
-		}, nil
 	}
+
+	return &pb.BlogId{
+		Id: oid.Hex(),
+	}, nil
 }

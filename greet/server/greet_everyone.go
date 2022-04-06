@@ -8,7 +8,7 @@ import (
 )
 
 func (*Server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
-	log.Println("GreetEveryone function was invoked")
+	log.Println("GreetEveryone was invoked")
 
 	for {
 		req, err := stream.Recv()

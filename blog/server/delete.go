@@ -14,7 +14,7 @@ import (
 )
 
 func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*emptypb.Empty, error) {
-	log.Printf("DeleteBlog function was invoked with %v\n", in)
+	log.Printf("DeleteBlog was invoked with %v\n", in)
 
 	oid, err := primitive.ObjectIDFromHex(in.Id)
 	if err != nil {
@@ -25,7 +25,6 @@ func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*emptypb.Empty, e
 	}
 
 	filter := bson.M{"_id": oid}
-
 	res, err := collection.DeleteOne(ctx, filter)
 
 	if err != nil {

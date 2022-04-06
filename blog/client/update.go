@@ -8,7 +8,7 @@ import (
 )
 
 func updateBlog(c pb.BlogServiceClient, id string) {
-	log.Println("----updateBlog was invoked----")
+	log.Println("---updateBlog was invoked---")
 	newBlog := &pb.Blog{
 		Id:       id,
 		AuthorId: "Changed Author",

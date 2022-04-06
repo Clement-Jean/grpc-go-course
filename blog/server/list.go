@@ -13,7 +13,7 @@ import (
 )
 
 func (*Server) ListBlogs(_ *emptypb.Empty, stream pb.BlogService_ListBlogsServer) error {
-	log.Println("ListBlog function was invoked")
+	log.Println("ListBlog was invoked")
 
 	cur, err := collection.Find(context.Background(), primitive.D{{}})
 	if err != nil {
