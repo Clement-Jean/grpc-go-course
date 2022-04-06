@@ -26,9 +26,9 @@ func doGreetWithDeadline(c pb.GreetServiceClient, timeout time.Duration) {
 			if e.Code() == codes.DeadlineExceeded {
 				log.Println("Deadline exceeded!")
 				return
-			} else {
-				log.Fatalf("Unexpected gRPC error: %v\n", e)
 			}
+
+			log.Fatalf("Unexpected gRPC error: %v\n", e)
 		} else {
 			log.Fatalf("A non gRPC error: %v\n", err)
 		}

@@ -22,29 +22,29 @@ func TestSum(t *testing.T) {
 	c := pb.NewCalculatorServiceClient(conn)
 
 	tests := []struct {
-		expected      int32
-		first_number  int32
-		second_number int32
+		expected     int32
+		firstNumber  int32
+		secondNumber int32
 	}{
 		{
-			expected:      2,
-			first_number:  1,
-			second_number: 1,
+			expected:     2,
+			firstNumber:  1,
+			secondNumber: 1,
 		},
 		{
-			expected:      -1,
-			first_number:  -2,
-			second_number: 1,
+			expected:     -1,
+			firstNumber:  -2,
+			secondNumber: 1,
 		},
 		{
-			expected:      -1,
-			first_number:  0,
-			second_number: -1,
+			expected:     -1,
+			firstNumber:  0,
+			secondNumber: -1,
 		},
 	}
 
 	for _, tt := range tests {
-		req := &pb.SumRequest{FirstNumber: tt.first_number, SecondNumber: tt.second_number}
+		req := &pb.SumRequest{FirstNumber: tt.firstNumber, SecondNumber: tt.secondNumber}
 		res, err := c.Sum(context.Background(), req)
 
 		if err != nil {
@@ -52,7 +52,7 @@ func TestSum(t *testing.T) {
 		}
 
 		if res.Result != tt.expected {
-			t.Errorf("SumResponse(%v, %v) = %v, expected %v", tt.first_number, tt.second_number, res.Result, tt.expected)
+			t.Errorf("SumResponse(%v, %v) = %v, expected %v", tt.firstNumber, tt.secondNumber, res.Result, tt.expected)
 		}
 	}
 }
