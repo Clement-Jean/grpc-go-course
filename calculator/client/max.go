@@ -42,7 +42,7 @@ func doMax(c pb.CalculatorServiceClient) {
 			}
 
 			if err != nil {
-				log.Fatalf("Problem while reading server stream: %v", err)
+				log.Fatalf("Problem while reading server stream: %v\n", err)
 				break
 			}
 

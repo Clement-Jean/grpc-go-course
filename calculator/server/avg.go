@@ -22,7 +22,7 @@ func (*Server) Avg(stream pb.CalculatorService_AvgServer) error {
 		}
 
 		if err != nil {
-			log.Fatalf("Error while reading client stream: %v", err)
+			log.Fatalf("Error while reading client stream: %v\n", err)
 		}
 
 		sum += req.Number

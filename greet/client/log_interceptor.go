@@ -10,7 +10,7 @@ import (
 
 func LogInterceptor() grpc.UnaryClientInterceptor {
 	return func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
-		log.Printf("%s was invoked with %v", method, req)
+		log.Printf("%s was invoked with %v\n", method, req)
 
 		headers, ok := metadata.FromOutgoingContext(ctx)
 

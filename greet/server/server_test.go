@@ -20,7 +20,7 @@ func init() {
 	pb.RegisterGreetServiceServer(s, &Server{})
 	go func() {
 		if err := s.Serve(lis); err != nil {
-			log.Fatalf("Server exited with error: %v", err)
+			log.Fatalf("Server exited with error: %v\n", err)
 		}
 	}()
 }

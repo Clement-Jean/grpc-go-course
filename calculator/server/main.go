@@ -19,7 +19,7 @@ func main() {
 	lis, err := net.Listen("tcp", addr)
 
 	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
+		log.Fatalf("Failed to listen: %v\n", err)
 	}
 
 	log.Printf("Listening at %s\n", addr)
@@ -31,6 +31,6 @@ func main() {
 	reflection.Register(s)
 
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
+		log.Fatalf("Failed to serve: %v\n", err)
 	}
 }

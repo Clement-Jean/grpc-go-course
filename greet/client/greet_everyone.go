@@ -15,7 +15,7 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 	stream, err := c.GreetEveryone(context.Background())
 
 	if err != nil {
-		log.Fatalf("Error while creating stream: %v", err)
+		log.Fatalf("Error while creating stream: %v\n", err)
 	}
 
 	requests := []*pb.GreetRequest{
@@ -41,7 +41,7 @@ func doGreetEveryone(c pb.GreetServiceClient) {
 				break
 			}
 			if err != nil {
-				log.Printf("Error while receiving: %v", err)
+				log.Printf("Error while receiving: %v\n", err)
 				break
 			}
 			log.Printf("Received: %v\n", res.Result)

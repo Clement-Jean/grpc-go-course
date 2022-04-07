@@ -16,7 +16,7 @@ func doPrimes(c pb.CalculatorServiceClient) {
 	stream, err := c.Primes(context.Background(), req)
 
 	if err != nil {
-		log.Fatalf("error while calling Primes RPC: %v", err)
+		log.Fatalf("error while calling Primes: %v\n", err)
 	}
 
 	for {
@@ -27,7 +27,7 @@ func doPrimes(c pb.CalculatorServiceClient) {
 		}
 
 		if err != nil {
-			log.Fatalf("Something happened: %v", err)
+			log.Fatalf("Something happened: %v\n", err)
 		}
 
 		log.Println(res.Result)

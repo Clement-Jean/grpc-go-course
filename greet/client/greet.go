@@ -12,8 +12,8 @@ func doGreet(c pb.GreetServiceClient) {
 	r, err := c.Greet(context.Background(), &pb.GreetRequest{FirstName: "Clement"})
 
 	if err != nil {
-		log.Fatalf("Could not greet: %v", err)
+		log.Fatalf("Could not greet: %v\n", err)
 	}
 
-	log.Printf("Greeting: %s", r.Result)
+	log.Printf("Greeting: %s\n", r.Result)
 }

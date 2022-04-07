@@ -19,17 +19,17 @@ func (*Server) Max(stream pb.CalculatorService_MaxServer) error {
 		}
 
 		if err != nil {
-			log.Fatalf("Error while reading client stream: %v", err)
+			log.Fatalf("Error while reading client stream: %v\n", err)
 		}
 
 		if number := req.Number; number > maximum {
 			maximum = number
-			sendErr := stream.Send(&pb.MaxResponse{
+			err = stream.Send(&pb.MaxResponse{
 				Result: maximum,
 			})
 
-			if sendErr != nil {
-				log.Fatalf("Error while sending data to client: %v", sendErr)
+			if err != nil {
+				log.Fatalf("Error while sending data to client: %v\n", err)
 			}
 		}
 	}

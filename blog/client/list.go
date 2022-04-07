@@ -14,7 +14,7 @@ func listBlog(c pb.BlogServiceClient) {
 	stream, err := c.ListBlogs(context.Background(), &emptypb.Empty{})
 
 	if err != nil {
-		log.Fatalf("error while calling ListBlog RPC: %v", err)
+		log.Fatalf("Error while calling ListBlogs: %v\n", err)
 	}
 
 	for {
@@ -25,7 +25,7 @@ func listBlog(c pb.BlogServiceClient) {
 		}
 
 		if err != nil {
-			log.Fatalf("Something happened: %v", err)
+			log.Fatalf("Something happened: %v\n", err)
 		}
 
 		log.Println(res)

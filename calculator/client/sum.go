@@ -12,7 +12,7 @@ func doSum(c pb.CalculatorServiceClient) {
 	r, err := c.Sum(context.Background(), &pb.SumRequest{FirstNumber: 1, SecondNumber: 1})
 
 	if err != nil {
-		log.Fatalf("Could not sum: %v", err)
+		log.Fatalf("Could not sum: %v\n", err)
 	}
 
 	log.Printf("Sum: %d\n", r.Result)
