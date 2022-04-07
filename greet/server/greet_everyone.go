@@ -28,7 +28,7 @@ func (*Server) GreetEveryone(stream pb.GreetService_GreetEveryoneServer) error {
 		})
 
 		if err != nil {
-			log.Fatalf("Error while sending data to client: %v\n", sendErr)
+			log.Fatalf("Error while sending data to client: %v\n", err)
 		}
 	}
 }
