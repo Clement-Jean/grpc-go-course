@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	pb "github.com/Clement-Jean/grpc-go-course/blog/proto"
@@ -13,8 +12,8 @@ func deleteBlog(c pb.BlogServiceClient, id string) {
 	_, err := c.DeleteBlog(context.Background(), &pb.BlogId{Id: id})
 
 	if err != nil {
-		fmt.Printf("Error happened while deleting: %v\n", err)
+		log.Fatalf("Error happened while deleting: %v\n", err)
 	}
 
-	fmt.Println("Blog was deleted")
+	log.Println("Blog was deleted")
 }
