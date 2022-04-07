@@ -13,18 +13,19 @@ import (
 )
 
 func (*Server) ListBlogs(_ *emptypb.Empty, stream pb.BlogService_ListBlogsServer) error {
-	log.Println("ListBlog was invoked")
+	log.Println("ListBlogs was invoked")
 
-	cur, err := collection.Find(context.Background(), primitive.D{{}})
+	ctx := context.Background()
+	cur, err := collection.Find(ctx, primitive.D{{}})
 	if err != nil {
 		return status.Errorf(
 			codes.Internal,
 			fmt.Sprintf("Unknown internal error: %v", err),
 		)
 	}
-	defer cur.Close(context.Background())
+	defer cur.Close(ctx)
 
-	for cur.Next(context.Background()) {
+	for cur.Next(ctx) {
 		data := &BlogItem{}
 		err := cur.Decode(data)
 
@@ -38,7 +39,7 @@ func (*Server) ListBlogs(_ *emptypb.Empty, stream pb.BlogService_ListBlogsServer
 		stream.Send(documentToBlog(data))
 	}
 
-	if err := cur.Err(); err != nil {
+	if err = cur.Err(); err != nil {
 		return status.Errorf(
 			codes.Internal,
 			fmt.Sprintf("Unknown internal error: %v", err),
