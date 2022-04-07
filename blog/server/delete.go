@@ -24,8 +24,7 @@ func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*emptypb.Empty, e
 		)
 	}
 
-	filter := bson.M{"_id": oid}
-	res, err := collection.DeleteOne(ctx, filter)
+	res, err := collection.DeleteOne(ctx, bson.M{"_id": oid})
 
 	if err != nil {
 		return nil, status.Errorf(
@@ -37,7 +36,7 @@ func (*Server) DeleteBlog(ctx context.Context, in *pb.BlogId) (*emptypb.Empty, e
 	if res.DeletedCount == 0 {
 		return nil, status.Errorf(
 			codes.NotFound,
-			fmt.Sprintf("Cannot find blog in MongoDB: %v", err),
+			"Blog was not found",
 		)
 	}
 
