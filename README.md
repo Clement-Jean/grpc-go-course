@@ -35,14 +35,14 @@ protoc -Icalculator/proto --go_opt=module=github.com/Clement-Jean/grpc-go-course
 
 protoc -Iblog/proto --go_opt=module=github.com/Clement-Jean/grpc-go-course --go_out=. --go-grpc_opt=module=github.com/Clement-Jean/grpc-go-course --go-grpc_out=. blog/proto/*.proto
 
-go build -o bin/greet/client.exe ./greet/client
 go build -o bin/greet/server.exe ./greet/server
+go build -o bin/greet/client.exe ./greet/client
 
-go build -o bin/calculator/client.exe ./calculator/client
 go build -o bin/calculator/server.exe ./calculator/server
+go build -o bin/calculator/client.exe ./calculator/client
 
-go build -o bin/blog/client.exe ./blog/client
 go build -o bin/blog/server.exe ./blog/server
+go build -o bin/blog/client.exe ./blog/client
 ```
 
 <a name="makefile"></a>
