@@ -73,6 +73,9 @@ clean_blog: ## Clean generated files for blog
 
 rebuild: clean all ## Rebuild the whole project
 
+bump: all ## Update packages version
+	go get -u ./...
+
 about: ## Display info related to the build
 	@echo "OS: ${OS}"
 	@echo "Shell: ${SHELL} ${SHELL_VERSION}"
