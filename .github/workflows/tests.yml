@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-go-build-${{ hashFiles('**/*') }}
 
       - name: Go Mod Cache
         uses: actions/cache@v3.0.11
