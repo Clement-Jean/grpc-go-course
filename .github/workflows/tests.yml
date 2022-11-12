@@ -20,9 +20,9 @@ jobs:
       matrix:
         os: [ubuntu-20.04, macos-11, windows-2022]
     steps:
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3.0.0
         with:
-          go-version: '^1.17'
+          go-version: '^1.19'
 
       - id: go-cache-paths
         run: |
@@ -30,40 +30,40 @@ jobs:
           echo "::set-output name=go-mod::$(go env GOMODCACHE)"
           echo "::set-output name=go-path-bin::$(go env GOPATH)/bin"
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
 
       - name: Go Build Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.go-cache-paths.outputs.go-build }}
           key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
 
       - name: Go Mod Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.go-cache-paths.outputs.go-mod }}
           key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
 
       - name: Go Bin Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.go-cache-paths.outputs.go-path-bin }}
           key: ${{ runner.os }}-go-path-bin-${{ hashFiles('**/go.sum') }}
-      
+
       - name: Install make (if needed)
         run: choco install make
         if: runner.os == 'Windows'
 
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        uses: arduino/setup-protoc@v1.1.2
         with:
           version: '3.x'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install gRPC Go plugins
         run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 
       - name: Test
         run: make test
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
       - run: |
           sed -i 's/linux-brightgreen/linux-red/g' README.md
           if [[ `git status --porcelain` ]]; then
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ success() }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
       - run: |
           sed -i 's/linux-red/linux-brightgreen/g' README.md
           if [[ `git status --porcelain` ]]; then

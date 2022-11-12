@@ -9,7 +9,7 @@ jobs:
     name: badge_generation
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.5.0
       - name: Badge generation
         uses: Clement-Jean/udemy-badge-generator@v1
         env:
