@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v3.0.0
         with:
-          go-version: '^1.19'
+          go-version: '^1.18'
 
       - id: go-cache-paths
         run: |
@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v3.0.11
         with:
           path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-go-build-${{ hashFiles('**/*') }}
+          key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
 
       - name: Go Mod Cache
         uses: actions/cache@v3.0.11
