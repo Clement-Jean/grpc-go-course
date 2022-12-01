@@ -25,7 +25,7 @@ else
 	else ifeq ($(UNAME),Linux)
 		OS = linux ${VERSION_AND_ARCH}
 	else
-    $(error OS not supported by this Makefile)
+		$(error OS not supported by this Makefile)
 	endif
 	PACKAGE = $(shell head -1 go.mod | awk '{print $$2}')
 	CHECK_DIR_CMD = test -d $@ || (echo "\033[31mDirectory $@ doesn't exist\033[0m" && false)
