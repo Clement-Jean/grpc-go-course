@@ -26,7 +26,6 @@ func TestDelete(t *testing.T) {
 	defer conn.Close()
 	c := pb.NewBlogServiceClient(conn)
 	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
-	defer mt.Close()
 
 	mt.Run("Success", func(mt *mtest.T) {
 		collection = mt.Coll
@@ -59,7 +58,6 @@ func TestDeleteCountZeroError(t *testing.T) {
 	defer conn.Close()
 	c := pb.NewBlogServiceClient(conn)
 	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
-	defer mt.Close()
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
@@ -102,7 +100,6 @@ func TestDeleteOneError(t *testing.T) {
 	defer conn.Close()
 	c := pb.NewBlogServiceClient(conn)
 	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
-	defer mt.Close()
 
 	mt.Run("Error", func(mt *mtest.T) {
 		collection = mt.Coll
